@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from win32api import GetSystemMetrics
 import base64
 import ctypes
 import json
