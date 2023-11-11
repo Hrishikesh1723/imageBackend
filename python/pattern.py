@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import base64
-import ctypes
 import json
 import sys
 
@@ -11,17 +10,14 @@ def decode_base64_image(base64_string):
     image = cv2.imdecode(image, cv2.IMREAD_COLOR)
     return image
 
-def get_system_metrics(metric):
-    # Using ctypes to call GetSystemMetrics
-    user32 = ctypes.CDLL('user32')
-    return user32.GetSystemMetrics(metric)
+
 
 def calculate_image_similarity(base64_string1, base64_string2):
     image1 = decode_base64_image(base64_string1)
     image2 = decode_base64_image(base64_string2)
 
-    screen_height = get_system_metrics(1)
-    max_height = int(0.8 * screen_height)
+    
+    max_height = 1080
     scaling_factor = max_height / max(image1.shape[0], image2.shape[0])
     image1 = cv2.resize(image1, (0, 0), fx=scaling_factor, fy=scaling_factor)
     image2 = cv2.resize(image2, (0, 0), fx=scaling_factor, fy=scaling_factor)
