@@ -58,7 +58,7 @@ router.post("/colorCompare", async (req, res) => {
     try {
         const imageBase64_1 = image_base64_1;
         const imageBase64_2 = image_base64_2;
-        const numColors = 10;
+        const numColors = 5;
         console.log("nsiudn")
         calculateImageSimilarity(imageBase64_1, imageBase64_2, numColors)
             .then((result) => {
