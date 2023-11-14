@@ -4,7 +4,7 @@ const axios = require('axios');
 const router = express.Router();
 
 // Function to run Python script with arguments
-function calculateImageSimilarity(imageBase64_1, imageBase64_2, numColors) {
+function calculateImageSimilarity(imageBase64_1, imageBase64_2) {
     return new Promise((resolve, reject) => {
         const pythonScriptPath = './python/color.py';
 
@@ -12,8 +12,7 @@ function calculateImageSimilarity(imageBase64_1, imageBase64_2, numColors) {
 
         const inputData = {
             image_base64_1: imageBase64_1,
-            image_base64_2: imageBase64_2,
-            num_colors: numColors
+            image_base64_2: imageBase64_2
         };
 
         pythonProcess.stdin.write(JSON.stringify(inputData));
@@ -58,9 +57,8 @@ router.post("/colorCompare", async (req, res) => {
     try {
         const imageBase64_1 = image_base64_1;
         const imageBase64_2 = image_base64_2;
-        const numColors = 5;
         console.log("nsiudn")
-        calculateImageSimilarity(imageBase64_1, imageBase64_2, numColors)
+        calculateImageSimilarity(imageBase64_1, imageBase64_2)
             .then((result) => {
                 console.log('Similarity Score:', result.similarityScore);
                 console.log('Similarity Percentage:', result.similarityPercentage);
