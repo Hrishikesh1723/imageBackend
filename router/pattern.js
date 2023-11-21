@@ -51,9 +51,12 @@ router2.post("/patternCompare", async (req, res) => {
         return res.status(422).json({ error: "Please enter full detail!" });
     }
     try {
-        const imageBase64_1 = image_base64_1;
-        const imageBase64_2 = image_base64_2;
-        calculateImageSimilarity(imageBase64_1, imageBase64_2)
+        const imageBase64_1 = req.body.image_base64_1;
+        const imageBase64_2 = req.body.image_base64_2;
+        const img1 = imageBase64_1.split(",")
+        const img2 = imageBase64_2.split(",")
+        console.log(img2[1])
+        calculateImageSimilarity(img1[1], img2[1])
             .then((result) => {
                 console.log('Result:', result.result);
                 console.log('Similarity Percentage:', result.similarity_percentage.toFixed(2) + '%');
